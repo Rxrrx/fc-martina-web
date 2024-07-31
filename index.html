@@ -18,39 +18,64 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
             position: relative;
-            padding: 20px; /* Add padding for smaller screens */
+            padding: 20px;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, p, .button-container button {
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
         h1 {
             font-size: 3em;
             margin: 0;
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
+            animation-delay: 0.5s; /* Delay for the title */
         }
+
         p {
             font-size: 1.5em;
             margin: 20px 0;
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
+            animation-delay: 1s; /* Delay for the subtitle */
         }
+
         .button-container {
             margin-top: 30px;
-            margin-bottom: 30px; /* Added bottom margin */
+            margin-bottom: 30px;
         }
+
         .button-container button {
             padding: 15px 30px;
             font-size: 1.2em;
             cursor: pointer;
-            background-color: #ff4081;
+            background-color: #ff5b81; /* Button color */
             border: none;
             border-radius: 10px;
             color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.3s;
+            animation-delay: 1.5s; /* Delay for the button */
         }
+
         .button-container button:hover {
-            background-color: #e60073;
+            background-color: #e04368; /* Hover color */
             transform: translateY(-2px);
         }
 
@@ -64,7 +89,7 @@
             width: 10px;
             height: 20px;
             top: 0;
-            background-color: #ff4081;
+            background-color: #ff5b81; /* Confetti color */
             opacity: 0;
             animation: confetti 2s linear infinite;
         }
@@ -75,8 +100,8 @@
             width: 90%;
             max-width: 600px;
             height: auto;
-            background-color: #fff;
-            border: 2px solid #ff4081;
+            background: linear-gradient(135deg, #e94057, #6e40ca); /* Gradiente */
+            border: 2px solid #6b2b70; /* Border color */
             border-radius: 20px;
             overflow: hidden;
             transform: scale(0);
@@ -86,7 +111,7 @@
         .dialog {
             position: relative;
             width: 100%;
-            background-color: #ff4081;
+            background: linear-gradient(135deg, #e94057, #6e40ca); /* Gradiente */
             color: #fff;
             padding: 20px;
             box-sizing: border-box;
@@ -101,6 +126,7 @@
         .box.open .dialog {
             transform: translateY(0);
         }
+
         /* Footer CSS */
         .footer {
             position: absolute;
