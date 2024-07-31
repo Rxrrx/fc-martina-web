@@ -18,7 +18,7 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            padding: 20px; /* Add padding for smaller screens */
         }
         h1 {
             font-size: 3em;
@@ -26,7 +26,6 @@
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
-            animation: fadeIn 1.5s ease-in-out;
         }
         p {
             font-size: 1.5em;
@@ -34,12 +33,10 @@
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
-            animation: fadeIn 1.5s ease-in-out 0.5s both;
         }
         .button-container {
             margin-top: 30px;
-            margin-bottom: 30px; /* Añadido margen inferior */
-            animation: fadeIn 1.5s ease-in-out 1s both;
+            margin-bottom: 30px; /* Added bottom margin */
         }
         .button-container button {
             padding: 15px 30px;
@@ -51,34 +48,16 @@
             color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         .button-container button:hover {
             background-color: #e60073;
             transform: translateY(-2px);
         }
-        .button-container button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%) rotate(45deg);
-            transition: width 0.3s, height 0.3s;
-            border-radius: 50%;
-        }
-        .button-container button:hover::before {
-            width: 0;
-            height: 0;
-        }
 
         /* Confetti CSS */
         @keyframes confetti {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
         .confetti {
             position: absolute;
@@ -93,9 +72,9 @@
         /* Box and dialog CSS */
         .box {
             position: relative;
-            width: 60%;
+            width: 90%;
             max-width: 600px;
-            height: 300px;
+            height: auto;
             background-color: #fff;
             border: 2px solid #ff4081;
             border-radius: 20px;
@@ -103,16 +82,13 @@
             transform: scale(0);
             transition: transform 0.5s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-in-out 1.5s both;
         }
         .dialog {
-            position: absolute;
-            bottom: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
             background-color: #ff4081;
             color: #fff;
-            padding: 40px;
+            padding: 20px;
             box-sizing: border-box;
             transform: translateY(100%);
             transition: transform 0.5s;
@@ -134,9 +110,20 @@
             color: #fff;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            .button-container button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .dialog {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -168,11 +155,8 @@
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = `${Math.random() * 100}vw`;
-                confetti.style.width = `${Math.random() * 10 + 5}px`;
-                confetti.style.height = `${Math.random() * 20 + 10}px`;
                 confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
                 confettiContainer.appendChild(confetti);
             }
 
