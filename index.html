@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Sorpresa para Ti</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('hola.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            animation: fadeIn 1.5s ease-in-out 0.5s both;
+        }
+        .button-container {
+            margin-top: 30px;
+            margin-bottom: 30px; /* Añadido margen inferior */
+            animation: fadeIn 1.5s ease-in-out 1s both;
+        }
+        .button-container button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #ff4081;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .button-container button:hover {
+            background-color: #e60073;
+            transform: translateY(-2px);
+        }
+        .button-container button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: width 0.3s, height 0.3s;
+            border-radius: 50%;
+        }
+        .button-container button:hover::before {
+            width: 0;
+            height: 0;
+        }
+
+        /* Confetti CSS */
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            top: 0;
+            background-color: #ff4081;
+            opacity: 0;
+            animation: confetti 2s linear infinite;
+        }
+
+        /* Box and dialog CSS */
+        .box {
+            position: relative;
+            width: 60%;
+            max-width: 600px;
+            height: 300px;
+            background-color: #fff;
+            border: 2px solid #ff4081;
+            border-radius: 20px;
+            overflow: hidden;
+            transform: scale(0);
+            transition: transform 0.5s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out 1.5s both;
+        }
+        .dialog {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff4081;
+            color: #fff;
+            padding: 40px;
+            box-sizing: border-box;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .box.open .dialog {
+            transform: translateY(0);
+        }
+        /* Footer CSS */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 1em;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Listo para una sorpresa?</h1>
+    <p>Presiona el botón para descubrirlo.</p>
+    <div class="button-container">
+        <button onclick="showSurprise()">Celebrar</button>
+    </div>
+    <div class="box" id="box">
+        <div class="dialog">
+            <h1>¡Feliz Cumpleaños!</h1>
+            <p>Que tengas un día maravilloso lleno de sorpresas y alegrías. 
+            Espero que este año te traiga mucha felicidad, éxito y amor. 
+            Disfruta de tu día al máximo, ¡te lo mereces!</p>
+        </div>
+    </div>
+    <div class="footer">
+        MADE BY ROFFO &copy;
+    </div>
+
+    <script>
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.classList.add('confetti-container');
+            document.body.appendChild(confettiContainer);
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = `${Math.random() * 20 + 10}px`;
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confettiContainer.appendChild(confetti);
+            }
+
+            setTimeout(() => {
+                confettiContainer.remove();
+            }, 3000);
+        }
+
+        function showSurprise() {
+            createConfetti();
+            const box = document.getElementById('box');
+            box.style.transform = 'scale(1)';
+            setTimeout(() => {
+                box.classList.add('open');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
